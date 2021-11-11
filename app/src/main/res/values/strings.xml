@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Formulario</string>
+    <string name="tvNombre">Nombres(*):</string>
+    <string name="tvApellido">Apellidos(*):</string>
+    <string name="tvMovil">Móvil(*):</string>
+    <string name="tvEmail">Email(*):</string>
+    <string name="tvFormaContacto">Selecione forma contacto:</string>
+    <string name="tvDeporte">Deporte:</string>
+    <string name="tvPosicion">Elige psición:</string>
+    <string name="btnEnviarInfo">Enviar información</string>
+</resources>
