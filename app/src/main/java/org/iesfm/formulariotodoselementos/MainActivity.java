@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -54,10 +55,6 @@ public class MainActivity extends AppCompatActivity {
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         tvMovil = (TextView) findViewById(R.id.tvMovil);
 
-        etEmail.setVisibility(View.GONE);
-        etMovil.setVisibility(View.GONE);
-        tvMovil.setVisibility(View.GONE);
-        tvEmail.setVisibility(View.GONE);
 
         contenedor = (RadioGroup) findViewById(R.id.contenedor);
         posicion1 = (RadioButton) findViewById(R.id.posicion1);
@@ -73,16 +70,41 @@ public class MainActivity extends AppCompatActivity {
         sContactos = (Spinner) findViewById(R.id.sContacto);
         sContactos.setAdapter(adapter);
 
-        switch (sContactos.getSelectedItemPosition()){
-            case 1:
-                etMovil.setVisibility(View.VISIBLE);
-                tvMovil.setVisibility(View.VISIBLE);
-                break;
-            case 2:
-                etEmail.setVisibility(View.VISIBLE);
-                tvEmail.setVisibility(View.VISIBLE);
-                break;
-        }
+        sContactos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (sContactos.getSelectedItemPosition()) {
+                    case 1:
+                        etMovil.setVisibility(View.VISIBLE);
+                        tvMovil.setVisibility(View.VISIBLE);
+                        tvEmail.setVisibility(View.GONE);
+                        etEmail.setVisibility(View.GONE);
+                        break;
+                    case 2:
+                        etEmail.setVisibility(View.VISIBLE);
+                        tvEmail.setVisibility(View.VISIBLE);
+                        etMovil.setVisibility(View.GONE);
+                        tvMovil.setVisibility(View.GONE);
+                        break;
+                    case 0:
+                        etEmail.setVisibility(View.GONE);
+                        etMovil.setVisibility(View.GONE);
+                        tvMovil.setVisibility(View.GONE);
+                        tvEmail.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                etEmail.setVisibility(View.GONE);
+                etMovil.setVisibility(View.GONE);
+                tvMovil.setVisibility(View.GONE);
+                tvEmail.setVisibility(View.GONE);
+            }
+        });
+
 
     }
 
@@ -94,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         int seleccion = sDeportes.getSelectedItemPosition();
 
-        switch (sDeportes.getSelectedItem().toString()){
+        switch (sDeportes.getSelectedItem().toString()) {
             case "Futbol":
                 posicion1.setText("Portero");
                 posicion2.setText("defensa");
@@ -108,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 posicion4.setText("Utillero");
         }
 
-        if (seleccion == 1){
+        if (seleccion == 1) {
             posicion1.setText("Portero");
             posicion2.setText("defensa");
             posicion3.setText("lateral");
