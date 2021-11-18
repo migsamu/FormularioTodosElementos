@@ -2,6 +2,7 @@ package org.iesfm.formulariotodoselementos;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,8 +12,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    protected static final String INFORMACION_FORMULARIO = "org.iesfm.formulariotodoselementos.info";
 
     protected static final String[] contactos = {"Selecciona", "Móvil", "Email"};
     protected static final String[] deportes = {"Selecciona", "Futbol", "Baloncesto"};
@@ -33,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Spinner sDeportes;
     private Spinner sContactos;
+
+    private String posicion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
     }
@@ -135,8 +140,46 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     public void enviarInfo(View v) {
 
+        String nombre = etNombre.getText().toString();
+        String apellidos = etApellidos.getText().toString();
+        String movil = etMovil.getText().toString();
+        String email = etEmail.getText().toString();
+
+        switch (contenedor.getCheckedRadioButtonId()) {
+            case R.id.posicion1:
+                posicion = posicion1.getText().toString();
+                break;
+            case R.id.posicion2:
+                posicion = posicion2.getText().toString();
+                break;
+            case R.id.posicion3:
+                posicion = posicion3.getText().toString();
+                break;
+            case R.id.posicion4:
+                posicion = posicion4.getText().toString();
+                break;
+        }
+
+        if (etNombre.getText().toString().equals("") || etApellidos.getText().toString().equals("") || posicion == null) {
+            Toast.makeText(this, "Debe rellenar los campos indicados", Toast.LENGTH_SHORT).show();
+        } else if (etMovil.getText().toString().equals("") && etEmail.getText().toString().equals("")) {
+            Toast.makeText(this, "Debe seleccionar movil o email", Toast.LENGTH_SHORT).show();
+
+        } else {
+
+            String datos = nombre + "\n"
+                    + apellidos + "\n"
+                    + movil + "\n"
+                    + email + "\n"
+                    + posicion;
+
+            Intent informacionFormulario = new Intent(this, InformacionFormulario.class);
+            informacionFormulario.putExtra(INFORMACION_FORMULARIO, datos);
+            startActivity(informacionFormulario);
+        }
     }
 
 }

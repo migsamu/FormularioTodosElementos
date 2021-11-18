@@ -8,4 +8,5 @@
     <string name="tvDeporte">Deporte:</string>
     <string name="tvPosicion">Elige psición:</string>
     <string name="btnEnviarInfo">Enviar información</string>
+    <string name="volver">Volver</string>
 </resources>
