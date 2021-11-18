@@ -151,25 +151,14 @@
         tools:ignore="DuplicateSpeakableTextCheck,TextContrastCheck" />
 
     <TextView
-        android:id="@+id/tvDeporteElegido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sDeporte" />
-
-    <TextView
         android:id="@+id/tvPosicion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
         android:text="@string/tvPosicion"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDeporteElegido" />
+        app:layout_constraintTop_toBottomOf="@+id/sDeporte" />
 
     <RadioGroup
         android:id="@+id/contenedor"
@@ -211,6 +200,7 @@
         android:id="@+id/btnEnviarInfo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="enviarInfo"
         android:text="@string/btnEnviarInfo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

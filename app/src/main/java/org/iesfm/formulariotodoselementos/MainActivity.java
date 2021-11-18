@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         crearSpinnerContactos();
         crearSpinnerDeportes();
 
-
     }
 
     public void iniciarVariables() {
@@ -55,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         tvEmail = (TextView) findViewById(R.id.tvEmail);
         tvMovil = (TextView) findViewById(R.id.tvMovil);
 
-
         contenedor = (RadioGroup) findViewById(R.id.contenedor);
         posicion1 = (RadioButton) findViewById(R.id.posicion1);
         posicion2 = (RadioButton) findViewById(R.id.posicion2);
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void crearSpinnerContactos() {
-
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, contactos);
         sContactos = (Spinner) findViewById(R.id.sContacto);
         sContactos.setAdapter(adapter);
@@ -98,14 +95,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
-                etEmail.setVisibility(View.GONE);
-                etMovil.setVisibility(View.GONE);
-                tvMovil.setVisibility(View.GONE);
-                tvEmail.setVisibility(View.GONE);
             }
         });
-
-
     }
 
 
@@ -114,32 +105,38 @@ public class MainActivity extends AppCompatActivity {
         sDeportes = (Spinner) findViewById(R.id.sDeporte);
         sDeportes.setAdapter(adapter);
 
-        int seleccion = sDeportes.getSelectedItemPosition();
+        sDeportes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (sDeportes.getSelectedItem().toString()) {
+                    case "Futbol":
+                        posicion1.setText("Portero");
+                        posicion2.setText("defensa");
+                        posicion3.setText("lateral");
+                        posicion4.setText("Extremo");
+                        contenedor.setVisibility(View.VISIBLE);
+                        break;
+                    case "Baloncesto":
+                        posicion1.setText("Pivot");
+                        posicion2.setText("Base");
+                        posicion3.setText("Entrenador");
+                        posicion4.setText("Utillero");
+                        contenedor.setVisibility(View.VISIBLE);
+                        break;
+                    case "Selecciona":
+                        contenedor.setVisibility(View.GONE);
+                        break;
+                }
+            }
 
-        switch (sDeportes.getSelectedItem().toString()) {
-            case "Futbol":
-                posicion1.setText("Portero");
-                posicion2.setText("defensa");
-                posicion3.setText("lateral");
-                posicion4.setText("Extremo");
-                break;
-            case "Baloncesto":
-                posicion1.setText("Pivot");
-                posicion2.setText("Base");
-                posicion3.setText("Entrenador");
-                posicion4.setText("Utillero");
-        }
-
-        if (seleccion == 1) {
-            posicion1.setText("Portero");
-            posicion2.setText("defensa");
-            posicion3.setText("lateral");
-            posicion4.setText("Extremo");
-
-
-        }
-
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
     }
 
+    public void enviarInfo(View v) {
+
+    }
 
 }
